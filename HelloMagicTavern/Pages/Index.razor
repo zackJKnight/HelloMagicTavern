@@ -1,0 +1,27 @@
+﻿@page "/"
+
+<h1>About @since ago I fell through a magical dimensional portal...</h1>
+
+@code {
+    private const int FELL_INTO_PORTAL_YEAR = 2015;
+    private const int FELL_INTO_PORTAL_MONTH = 3;
+    private const int FELL_INTO_PORTAL_DAY = 7;
+    private static DateTime fellIntoPortal = new DateTime(FELL_INTO_PORTAL_YEAR, FELL_INTO_PORTAL_MONTH, FELL_INTO_PORTAL_DAY);
+
+    private static double totalDaysSince = (DateTime.Now - fellIntoPortal).TotalDays;
+    
+    private static double years = Math.Floor(totalDaysSince / 356);
+
+    private static double months= Math.Floor(totalDaysSince % 365 / (365.25 / 12));
+
+    private static double weeks = Math.Floor(totalDaysSince % 365 % (365.25 / 12) / (365.25 / 52));
+
+    private static string yearWord = years == 0 ? "" : years > 1 ? "years" : "year";
+    private static string monthWord = months > 1 ? "months" : "month";
+    private static string weekWord = weeks > 1 ? "weeks" : "week";
+
+    private static string zeroWeeks = weeks > 0 ? string.Empty : "and ";
+    private static string monthPart = months == 0 ? string.Empty : $", {zeroWeeks}{months} {monthWord}";
+    private static string weekPart = weeks == 0 ? string.Empty : $", and {weeks} {weekWord}";
+    private string since = $"{years} {yearWord}{monthPart}{weekPart}";
+}
